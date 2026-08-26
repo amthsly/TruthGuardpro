@@ -1050,9 +1050,9 @@
             bottom: 110px;
             right: 30px;
             z-index: 999;
-            width: 50vw;            /* HALF SCREEN WIDTH */
+            width: 50vw;
             max-width: 90vw;
-            height: 80vh;           /* HALF SCREEN HEIGHT (80% of viewport height) */
+            height: 80vh;
             max-height: 90vh;
             background: var(--bg-secondary);
             border: 1px solid var(--glass-border);
@@ -1112,7 +1112,7 @@
         }
 
         /* ============================================================
-                   COMMENT SECTION (NEW)
+                   COMMENT SECTION
                    ============================================================ */
         .comment-form {
             margin: 30px 0 40px;
@@ -1256,7 +1256,7 @@
             font-style: italic;
         }
 
-        /* Admin controls — hidden by default, shown only to lakshya & ishanvi */
+        /* Admin controls */
         #admin-controls {
             display: none;
             text-align: center;
@@ -1294,6 +1294,33 @@
             background: rgba(255, 0, 85, 0.15);
             border-color: var(--accent-coral);
             box-shadow: 0 0 30px rgba(255, 0, 85, 0.1);
+        }
+
+        /* Error banner for Supabase issues */
+        .supabase-error-banner {
+            background: rgba(255, 0, 85, 0.15);
+            border: 1px solid rgba(255, 0, 85, 0.3);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin: 20px 0 10px;
+            color: #ff6b6b;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            word-break: break-all;
+        }
+
+        .supabase-error-banner strong {
+            color: #ff4444;
+        }
+
+        .supabase-error-banner .hint {
+            color: var(--text-muted);
+            font-family: var(--font-space);
+            font-size: 0.8rem;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 0, 85, 0.1);
         }
 
         /* ============================================================
@@ -1362,7 +1389,7 @@
         }
 
         /* ============================================================
-                   RESPONSIVE — adjust chat drawer for smaller screens
+                   RESPONSIVE
                    ============================================================ */
         @media (max-width: 768px) {
             .glass {
@@ -1516,7 +1543,7 @@
     </div>
 
     <!-- ============================================================
-    LOGIN OVERLAY — Multi-role login
+    LOGIN OVERLAY
     ============================================================ -->
     <div id="login-overlay">
         <div class="login-card">
@@ -1793,7 +1820,7 @@
             </section>
 
             <!-- ============================================================
-            NEW: COMMENT SECTION (Supabase)
+            COMMENT SECTION (Supabase with detailed error reporting)
             ============================================================ -->
             <section class="section scroll-animate" id="comment-section">
                 <h2 class="section-title">💬 Join the Discourse</h2>
@@ -1801,6 +1828,9 @@
                     Share your thoughts on India's legal history, misinformation, and the state of civil liberties.
                     Comments are stored in a shared database — everyone can see them.
                 </p>
+
+                <!-- Error banner will appear here if something goes wrong -->
+                <div id="supabase-error-banner" class="supabase-error-banner" style="display:none;"></div>
 
                 <div class="comment-form">
                     <input type="text" id="commentName" placeholder="Your Name" autocomplete="off" />
@@ -1812,7 +1842,7 @@
                     <div class="empty-comments">Loading comments…</div>
                 </div>
 
-                <!-- Admin Controls: visible only to lakshya & ishanvi -->
+                <!-- Admin Controls -->
                 <div id="admin-controls">
                     <span class="admin-badge">🔐 Admin Panel — Clear All Comments</span>
                     <button class="clear-all-btn" id="clearAllComments">🗑️ Clear All Comments</button>
@@ -1848,7 +1878,7 @@
     </div><!-- /app-wrapper -->
 
     <!-- ============================================================
-    FLOATING CHAT BUTTON & DRAWER (HALF SCREEN)
+    FLOATING CHAT BUTTON & DRAWER
     ============================================================ -->
     <button class="fab" id="fabBtn" aria-label="Open Chat">
         💬
@@ -1877,8 +1907,8 @@
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         //  🔐 SETUP: Replace with your Supabase credentials
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        const SUPABASE_URL = 'https://yluklgjtpjgzygurxtbd.supabase.co';        
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlsdWtsZ2p0cGpnenlndXJ4dGJkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NjY1NTgsImV4cCI6MjEwMzM0MjU1OH0.Bgwb1LBU35VvOftTPG942h9-yPX2FO3u7O5iT9zD930'; 
+        const SUPABASE_URL = 'https://yluklgjtpjgzygurxtbd.supabase.co'; // 👈 PASTE YOUR URL HERE
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlsdWtsZ2p0cGpnenlndXJ4dGJkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NjY1NTgsImV4cCI6MjEwMzM0MjU1OH0.Bgwb1LBU35VvOftTPG942h9-yPX2FO3u7O5iT9zD930'; // 👈 PASTE YOUR ANON KEY HERE
 
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         //  1.  PRELOADER SEQUENCE
@@ -1935,7 +1965,7 @@
         })();
 
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        //  2.  LOGIN SYSTEM — Multi-role: truth/guard (viewer) | lakshya/lakshya & ishanvi/ishanvi (admin)
+        //  2.  LOGIN SYSTEM — Multi-role
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         (function loginSystem() {
             const overlay = document.getElementById('login-overlay');
@@ -1951,7 +1981,6 @@
                 const user = usernameInput.value.trim();
                 const pass = passwordInput.value.trim();
 
-                // Check admin
                 if (ADMINS.includes(user) && pass === user) {
                     window.currentUser = user;
                     window.isAdmin = true;
@@ -1959,7 +1988,6 @@
                     return;
                 }
 
-                // Check viewer
                 if (user === VIEWER && pass === 'guard') {
                     window.currentUser = user;
                     window.isAdmin = false;
@@ -1967,7 +1995,6 @@
                     return;
                 }
 
-                // Invalid
                 errorMsg.textContent = '❌ Invalid username or password. Please try again.';
                 usernameInput.style.borderColor = '#ff4444';
                 passwordInput.style.borderColor = '#ff4444';
@@ -1988,7 +2015,6 @@
                 usernameInput.value = '';
                 passwordInput.value = '';
 
-                // Show admin controls if admin
                 if (window.isAdmin) {
                     document.getElementById('admin-controls').style.display = 'block';
                     console.log(`🔑 Admin logged in: ${window.currentUser}`);
@@ -1997,10 +2023,7 @@
                     console.log(`👤 Viewer logged in: ${window.currentUser}`);
                 }
 
-                // Trigger scroll animations
                 initScrollAnimations();
-
-                // Initialize Supabase comment system
                 initSupabaseComments();
             }
 
@@ -2023,7 +2046,6 @@
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         function initScrollAnimations() {
             const animatedElements = document.querySelectorAll('.scroll-animate, .pop-on-scroll, .stagger-children');
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -2034,11 +2056,7 @@
                         }
                     }
                 });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
             animatedElements.forEach(el => observer.observe(el));
         }
 
@@ -2146,32 +2164,104 @@
         })();
 
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        //  6.  SUPABASE COMMENT SYSTEM (Shared Across All Users)
+        //  6.  SUPABASE COMMENT SYSTEM WITH DETAILED ERROR HANDLING
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         let supabaseClient = null;
+        let supabaseError = null;
+
+        function showSupabaseError(message, details) {
+            const banner = document.getElementById('supabase-error-banner');
+            banner.style.display = 'block';
+            banner.innerHTML = `
+                <strong>⚠️ Supabase Connection Error</strong><br>
+                ${message}
+                ${details ? `<br><br><strong>Details:</strong> ${details}` : ''}
+                <div class="hint">
+                    💡 <strong>Common fixes:</strong><br>
+                    • Make sure you've set SUPABASE_URL and SUPABASE_ANON_KEY correctly<br>
+                    • Check that your Supabase project is active (not paused)<br>
+                    • Verify the 'comments' table exists in your database<br>
+                    • Your URL should look like: https://xxxxx.supabase.co<br>
+                    • Your anon key should start with 'eyJ'
+                </div>
+            `;
+            document.getElementById('comments-feed').innerHTML = `
+                <div class="empty-comments" style="color: #ff6b6b;">
+                    ⚠️ Unable to connect to the database. Check the error banner above.
+                </div>
+            `;
+        }
 
         function initSupabaseComments() {
+            // Check if Supabase library loaded
             if (typeof supabase === 'undefined') {
-                console.error('Supabase library not loaded.');
-                document.getElementById('comments-feed').innerHTML =
-                    `<div class="empty-comments">⚠️ Supabase library failed to load. Please check your internet connection.</div>`;
+                showSupabaseError(
+                    'Supabase library did not load.',
+                    'The CDN script may be blocked. Check your internet connection or try a different browser.'
+                );
                 return;
             }
 
+            // Check if credentials are set
             if (SUPABASE_URL === 'YOUR_SUPABASE_URL' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY') {
-                document.getElementById('comments-feed').innerHTML =
-                    `<div class="empty-comments">⚠️ Supabase credentials not configured. Please set SUPABASE_URL and SUPABASE_ANON_KEY in the script.</div>`;
+                showSupabaseError(
+                    'Credentials not configured.',
+                    'Please replace SUPABASE_URL and SUPABASE_ANON_KEY with your actual Supabase credentials (near line 2240).'
+                );
+                return;
+            }
+
+            // Validate URL format
+            if (!SUPABASE_URL.startsWith('https://') || !SUPABASE_URL.includes('.supabase.co')) {
+                showSupabaseError(
+                    'Invalid Supabase URL format.',
+                    `Your URL: "${SUPABASE_URL}" should look like: https://your-project-id.supabase.co`
+                );
+                return;
+            }
+
+            // Validate key format
+            if (!SUPABASE_ANON_KEY.startsWith('eyJ')) {
+                showSupabaseError(
+                    'Invalid API key format.',
+                    'Your anon key should start with "eyJ". Double-check you copied the correct key from Supabase > Settings > API.'
+                );
                 return;
             }
 
             try {
                 supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                console.log('✅ Supabase client initialized.');
-                renderComments();
+                console.log('✅ Supabase client initialized. Testing connection…');
+
+                // Test the connection by checking if the table exists
+                supabaseClient
+                    .from('comments')
+                    .select('count', { count: 'exact', head: true })
+                    .then(({ error }) => {
+                        if (error) {
+                            if (error.message.includes('relation') && error.message.includes('does not exist')) {
+                                showSupabaseError(
+                                    'The "comments" table does not exist in your database.',
+                                    'Go to your Supabase SQL Editor and run the CREATE TABLE script provided in the setup guide.'
+                                );
+                            } else {
+                                showSupabaseError(
+                                    'Database query failed.',
+                                    error.message
+                                );
+                            }
+                        } else {
+                            // Connection successful!
+                            document.getElementById('supabase-error-banner').style.display = 'none';
+                            console.log('✅ Supabase connection successful!');
+                            renderComments();
+                        }
+                    });
             } catch (error) {
-                console.error('Supabase init error:', error);
-                document.getElementById('comments-feed').innerHTML =
-                    `<div class="empty-comments">⚠️ Failed to connect to the database. Please check your credentials.</div>`;
+                showSupabaseError(
+                    'Failed to initialize Supabase client.',
+                    error.message || 'Unknown error'
+                );
             }
         }
 
@@ -2204,13 +2294,13 @@
                     .insert([{ name: name.trim(), text: text.trim(), timestamp: Date.now() }]);
                 if (error) {
                     console.error('Add comment error:', error);
-                    alert('Failed to post comment.');
+                    alert('Failed to post comment: ' + error.message);
                     return false;
                 }
                 return true;
             } catch (e) {
                 console.error('Add comment exception:', e);
-                alert('Failed to post comment.');
+                alert('Failed to post comment: ' + e.message);
                 return false;
             }
         }
@@ -2228,13 +2318,13 @@
                     .eq('id', id);
                 if (error) {
                     console.error('Delete comment error:', error);
-                    alert('Failed to delete comment.');
+                    alert('Failed to delete comment: ' + error.message);
                     return false;
                 }
                 return true;
             } catch (e) {
                 console.error('Delete comment exception:', e);
-                alert('Failed to delete comment.');
+                alert('Failed to delete comment: ' + e.message);
                 return false;
             }
         }
@@ -2253,13 +2343,13 @@
                     .neq('id', 0);
                 if (error) {
                     console.error('Clear all error:', error);
-                    alert('Failed to clear comments.');
+                    alert('Failed to clear comments: ' + error.message);
                     return false;
                 }
                 return true;
             } catch (e) {
                 console.error('Clear all exception:', e);
-                alert('Failed to clear comments.');
+                alert('Failed to clear comments: ' + e.message);
                 return false;
             }
         }
@@ -2352,8 +2442,14 @@
         console.log('   👑 Admins: lakshya / lakshya  |  ishanvi / ishanvi');
         console.log('💬 Chatbot available via floating button.');
         console.log('📝 Comments stored in Supabase — shared across all users.');
-        console.log('🗑️ Admins can delete individual comments or clear all.');
         console.log('📐 Chat drawer set to 50% width & 80% height on desktop.');
+        console.log('');
+        console.log('⚠️ If you see a Supabase error, check:');
+        console.log('   1. SUPABASE_URL and SUPABASE_ANON_KEY are set correctly');
+        console.log('   2. Your Supabase project is active (not paused)');
+        console.log('   3. The "comments" table exists in your database');
+        console.log('   4. Your URL format: https://xxxxx.supabase.co');
+        console.log('   5. Your anon key starts with "eyJ"');
     </script>
 
 </body>
