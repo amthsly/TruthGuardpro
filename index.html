@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TruthGuard AI — Uncover India's Legal History</title>
 
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 
     <style>
@@ -20,6 +24,7 @@
             --accent-magenta: #ff00aa;
             --accent-gold: #ffcc00;
             --accent-orange: #ff6600;
+            --accent-coral: #ff0055;
             --glass-bg: rgba(10, 11, 16, 0.6);
             --glass-border: rgba(0, 212, 255, 0.08);
             --font-space: 'Space Grotesk', sans-serif;
@@ -443,7 +448,7 @@
         }
 
         /* ============================================================
-                   LOGIN OVERLAY — Working credentials: truth / guard
+                   LOGIN OVERLAY — Multi-role: truth/guard | lakshya/lakshya | ishanvi/ishanvi
                    ============================================================ */
         #login-overlay {
             position: fixed;
@@ -993,7 +998,7 @@
         }
 
         /* ============================================================
-                   FLOATING CHAT BUTTON & DRAWER
+                   FLOATING CHAT BUTTON & DRAWER (HALF SCREEN)
                    ============================================================ */
         .fab {
             position: fixed;
@@ -1045,10 +1050,10 @@
             bottom: 110px;
             right: 30px;
             z-index: 999;
-            width: 420px;
-            max-width: calc(100vw - 60px);
-            height: 600px;
-            max-height: calc(100vh - 180px);
+            width: 50vw;            /* HALF SCREEN WIDTH */
+            max-width: 90vw;
+            height: 80vh;           /* HALF SCREEN HEIGHT (80% of viewport height) */
+            max-height: 90vh;
             background: var(--bg-secondary);
             border: 1px solid var(--glass-border);
             border-radius: 28px;
@@ -1104,6 +1109,191 @@
             height: 100%;
             border: none;
             background: transparent;
+        }
+
+        /* ============================================================
+                   COMMENT SECTION (NEW)
+                   ============================================================ */
+        .comment-form {
+            margin: 30px 0 40px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 28px 24px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            color: #fff;
+            font-size: 15px;
+            font-family: var(--font-space);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        .comment-form input:focus,
+        .comment-form textarea:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.05);
+        }
+
+        .comment-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .comment-form .btn-submit {
+            padding: 14px 40px;
+            border: none;
+            border-radius: 60px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            color: #fff;
+            font-weight: 600;
+            font-size: 15px;
+            font-family: var(--font-space);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 35px rgba(0, 212, 255, 0.3);
+            width: 100%;
+        }
+
+        .comment-form .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 45px rgba(0, 212, 255, 0.45);
+        }
+
+        #comments-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        #comments-feed::-webkit-scrollbar {
+            width: 4px;
+        }
+        #comments-feed::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+        #comments-feed::-webkit-scrollbar-thumb {
+            background: var(--accent-cyan);
+            border-radius: 10px;
+        }
+
+        .comment-item {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 16px 20px;
+            border-radius: 16px;
+            border-left: 3px solid var(--accent-cyan);
+            transition: background 0.3s ease;
+            position: relative;
+        }
+
+        .comment-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .comment-item .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .comment-item .comment-header strong {
+            color: var(--accent-cyan);
+            font-size: 1rem;
+        }
+
+        .comment-item .comment-header .time {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+        }
+
+        .comment-item p {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .comment-item .delete-btn {
+            background: none;
+            border: none;
+            color: var(--accent-coral);
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+            font-family: var(--font-space);
+            opacity: 0.4;
+        }
+
+        .comment-item .delete-btn:hover {
+            background: rgba(255, 0, 85, 0.1);
+            opacity: 1;
+        }
+
+        .empty-comments {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 40px 20px;
+            font-style: italic;
+        }
+
+        /* Admin controls — hidden by default, shown only to lakshya & ishanvi */
+        #admin-controls {
+            display: none;
+            text-align: center;
+            margin-top: 24px;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255, 0, 85, 0.05);
+            border: 1px solid rgba(255, 0, 85, 0.1);
+        }
+
+        #admin-controls .admin-badge {
+            color: var(--accent-coral);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .clear-all-btn {
+            background: none;
+            border: 1px solid rgba(255, 0, 85, 0.3);
+            color: var(--accent-coral);
+            padding: 12px 32px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-family: var(--font-space);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .clear-all-btn:hover {
+            background: rgba(255, 0, 85, 0.15);
+            border-color: var(--accent-coral);
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.1);
         }
 
         /* ============================================================
@@ -1172,7 +1362,7 @@
         }
 
         /* ============================================================
-                   RESPONSIVE
+                   RESPONSIVE — adjust chat drawer for smaller screens
                    ============================================================ */
         @media (max-width: 768px) {
             .glass {
@@ -1263,6 +1453,9 @@
             .login-card {
                 padding: 28px 20px;
             }
+            .comment-form {
+                padding: 16px;
+            }
         }
 
         /* ============================================================
@@ -1323,12 +1516,12 @@
     </div>
 
     <!-- ============================================================
-    LOGIN OVERLAY — Working credentials: truth / guard
+    LOGIN OVERLAY — Multi-role login
     ============================================================ -->
     <div id="login-overlay">
         <div class="login-card">
             <h2>🔐 Access Restricted</h2>
-            <p>This archive is private. Enter your credentials to continue.</p>
+            <p>Enter your credentials to continue.</p>
             <div class="input-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" placeholder="Enter username" autocomplete="off" />
@@ -1599,6 +1792,40 @@
                 </div>
             </section>
 
+            <!-- ============================================================
+            NEW: COMMENT SECTION (Supabase)
+            ============================================================ -->
+            <section class="section scroll-animate" id="comment-section">
+                <h2 class="section-title">💬 Join the Discourse</h2>
+                <p class="section-subtitle">
+                    Share your thoughts on India's legal history, misinformation, and the state of civil liberties.
+                    Comments are stored in a shared database — everyone can see them.
+                </p>
+
+                <div class="comment-form">
+                    <input type="text" id="commentName" placeholder="Your Name" autocomplete="off" />
+                    <textarea id="commentText" placeholder="Write your comment…"></textarea>
+                    <button class="btn-submit" id="submitComment">Post Comment</button>
+                </div>
+
+                <div id="comments-feed">
+                    <div class="empty-comments">Loading comments…</div>
+                </div>
+
+                <!-- Admin Controls: visible only to lakshya & ishanvi -->
+                <div id="admin-controls">
+                    <span class="admin-badge">🔐 Admin Panel — Clear All Comments</span>
+                    <button class="clear-all-btn" id="clearAllComments">🗑️ Clear All Comments</button>
+                    <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 12px; opacity: 0.5;">
+                        This will permanently delete ALL comments from the database.
+                    </p>
+                </div>
+
+                <p style="color: var(--text-muted); font-size: 0.75rem; text-align: center; margin-top: 12px; opacity: 0.5;">
+                    Comments are stored in a shared Supabase database. All users see the same comments.
+                </p>
+            </section>
+
             <!-- ==================== FOOTER ==================== -->
             <footer class="footer scroll-animate" id="footerAnim">
                 <div class="left">
@@ -1621,7 +1848,7 @@
     </div><!-- /app-wrapper -->
 
     <!-- ============================================================
-    FLOATING CHAT BUTTON & DRAWER
+    FLOATING CHAT BUTTON & DRAWER (HALF SCREEN)
     ============================================================ -->
     <button class="fab" id="fabBtn" aria-label="Open Chat">
         💬
@@ -1647,6 +1874,12 @@
     JAVASCRIPT
     ============================================================ -->
     <script>
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        //  🔐 SETUP: Replace with your Supabase credentials
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        const SUPABASE_URL = 'https://yluklgjtpjgzygurxtbd.supabase.co';        
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlsdWtsZ2p0cGpnenlndXJ4dGJkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NjY1NTgsImV4cCI6MjEwMzM0MjU1OH0.Bgwb1LBU35VvOftTPG942h9-yPX2FO3u7O5iT9zD930'; 
+
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         //  1.  PRELOADER SEQUENCE
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1692,7 +1925,6 @@
 
             setTimeout(() => {
                 preloader.classList.add('hidden');
-                // Show login overlay
                 document.getElementById('login-overlay').classList.add('active');
                 document.body.style.overflow = 'hidden';
                 statusEl.textContent = 'Ready.';
@@ -1703,7 +1935,7 @@
         })();
 
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        //  2.  LOGIN SYSTEM — Working credentials: truth / guard
+        //  2.  LOGIN SYSTEM — Multi-role: truth/guard (viewer) | lakshya/lakshya & ishanvi/ishanvi (admin)
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         (function loginSystem() {
             const overlay = document.getElementById('login-overlay');
@@ -1712,37 +1944,64 @@
             const loginBtn = document.getElementById('loginBtn');
             const errorMsg = document.getElementById('loginError');
 
-            const CORRECT_USER = 'truth';
-            const CORRECT_PASS = 'guard';
+            const ADMINS = ['lakshya', 'ishanvi'];
+            const VIEWER = 'truth';
 
             function attemptLogin() {
                 const user = usernameInput.value.trim();
                 const pass = passwordInput.value.trim();
 
-                if (user === CORRECT_USER && pass === CORRECT_PASS) {
-                    // Success — unlock the site
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                    document.getElementById('appWrapper').classList.add('visible');
-                    // Trigger scroll animations
-                    initScrollAnimations();
-                    errorMsg.textContent = '';
-                    // Clear inputs
-                    usernameInput.value = '';
-                    passwordInput.value = '';
-                } else {
-                    // Error
-                    errorMsg.textContent = '❌ Invalid username or password. Please try again.';
-                    usernameInput.style.borderColor = '#ff4444';
-                    passwordInput.style.borderColor = '#ff4444';
-                    setTimeout(() => {
-                        usernameInput.style.borderColor = '';
-                        passwordInput.style.borderColor = '';
-                    }, 2000);
-                    usernameInput.value = '';
-                    passwordInput.value = '';
-                    usernameInput.focus();
+                // Check admin
+                if (ADMINS.includes(user) && pass === user) {
+                    window.currentUser = user;
+                    window.isAdmin = true;
+                    unlockSite();
+                    return;
                 }
+
+                // Check viewer
+                if (user === VIEWER && pass === 'guard') {
+                    window.currentUser = user;
+                    window.isAdmin = false;
+                    unlockSite();
+                    return;
+                }
+
+                // Invalid
+                errorMsg.textContent = '❌ Invalid username or password. Please try again.';
+                usernameInput.style.borderColor = '#ff4444';
+                passwordInput.style.borderColor = '#ff4444';
+                setTimeout(() => {
+                    usernameInput.style.borderColor = '';
+                    passwordInput.style.borderColor = '';
+                }, 2000);
+                usernameInput.value = '';
+                passwordInput.value = '';
+                usernameInput.focus();
+            }
+
+            function unlockSite() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                document.getElementById('appWrapper').classList.add('visible');
+                errorMsg.textContent = '';
+                usernameInput.value = '';
+                passwordInput.value = '';
+
+                // Show admin controls if admin
+                if (window.isAdmin) {
+                    document.getElementById('admin-controls').style.display = 'block';
+                    console.log(`🔑 Admin logged in: ${window.currentUser}`);
+                } else {
+                    document.getElementById('admin-controls').style.display = 'none';
+                    console.log(`👤 Viewer logged in: ${window.currentUser}`);
+                }
+
+                // Trigger scroll animations
+                initScrollAnimations();
+
+                // Initialize Supabase comment system
+                initSupabaseComments();
             }
 
             loginBtn.addEventListener('click', attemptLogin);
@@ -1756,7 +2015,6 @@
                 });
             });
 
-            // Focus on username
             setTimeout(() => usernameInput.focus(), 200);
         })();
 
@@ -1877,7 +2135,6 @@
             closeBtn.addEventListener('click', closeDrawer);
             openChatBtn.addEventListener('click', openDrawer);
 
-            // Close drawer when clicking outside
             document.addEventListener('click', (e) => {
                 if (drawer.classList.contains('open') &&
                     !drawer.contains(e.target) &&
@@ -1889,11 +2146,214 @@
         })();
 
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        //  6.  CONSOLE
+        //  6.  SUPABASE COMMENT SYSTEM (Shared Across All Users)
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        let supabaseClient = null;
+
+        function initSupabaseComments() {
+            if (typeof supabase === 'undefined') {
+                console.error('Supabase library not loaded.');
+                document.getElementById('comments-feed').innerHTML =
+                    `<div class="empty-comments">⚠️ Supabase library failed to load. Please check your internet connection.</div>`;
+                return;
+            }
+
+            if (SUPABASE_URL === 'YOUR_SUPABASE_URL' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY') {
+                document.getElementById('comments-feed').innerHTML =
+                    `<div class="empty-comments">⚠️ Supabase credentials not configured. Please set SUPABASE_URL and SUPABASE_ANON_KEY in the script.</div>`;
+                return;
+            }
+
+            try {
+                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                console.log('✅ Supabase client initialized.');
+                renderComments();
+            } catch (error) {
+                console.error('Supabase init error:', error);
+                document.getElementById('comments-feed').innerHTML =
+                    `<div class="empty-comments">⚠️ Failed to connect to the database. Please check your credentials.</div>`;
+            }
+        }
+
+        async function loadComments() {
+            if (!supabaseClient) return [];
+            try {
+                const { data, error } = await supabaseClient
+                    .from('comments')
+                    .select('*')
+                    .order('timestamp', { ascending: false });
+                if (error) {
+                    console.error('Load comments error:', error);
+                    return [];
+                }
+                return data || [];
+            } catch (e) {
+                console.error('Load comments exception:', e);
+                return [];
+            }
+        }
+
+        async function addComment(name, text) {
+            if (!supabaseClient) {
+                alert('Database not initialized. Please refresh.');
+                return false;
+            }
+            try {
+                const { error } = await supabaseClient
+                    .from('comments')
+                    .insert([{ name: name.trim(), text: text.trim(), timestamp: Date.now() }]);
+                if (error) {
+                    console.error('Add comment error:', error);
+                    alert('Failed to post comment.');
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                console.error('Add comment exception:', e);
+                alert('Failed to post comment.');
+                return false;
+            }
+        }
+
+        async function deleteComment(id) {
+            if (!window.isAdmin) {
+                alert('You are not authorized to delete comments.');
+                return false;
+            }
+            if (!supabaseClient) return false;
+            try {
+                const { error } = await supabaseClient
+                    .from('comments')
+                    .delete()
+                    .eq('id', id);
+                if (error) {
+                    console.error('Delete comment error:', error);
+                    alert('Failed to delete comment.');
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                console.error('Delete comment exception:', e);
+                alert('Failed to delete comment.');
+                return false;
+            }
+        }
+
+        async function clearAllComments() {
+            if (!window.isAdmin) {
+                alert('You are not authorized to clear comments.');
+                return false;
+            }
+            if (!supabaseClient) return false;
+            if (!confirm('⚠️ Delete ALL comments permanently?')) return false;
+            try {
+                const { error } = await supabaseClient
+                    .from('comments')
+                    .delete()
+                    .neq('id', 0);
+                if (error) {
+                    console.error('Clear all error:', error);
+                    alert('Failed to clear comments.');
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                console.error('Clear all exception:', e);
+                alert('Failed to clear comments.');
+                return false;
+            }
+        }
+
+        async function renderComments() {
+            const feed = document.getElementById('comments-feed');
+            const comments = await loadComments();
+
+            if (!comments || comments.length === 0) {
+                feed.innerHTML = `<div class="empty-comments">No comments yet. Be the first to share your thoughts.</div>`;
+                return;
+            }
+
+            feed.innerHTML = comments.map(c => {
+                const deleteBtn = window.isAdmin ?
+                    `<button class="delete-btn" data-id="${c.id}">🗑️ Delete</button>` :
+                    '';
+                return `
+                    <div class="comment-item" data-id="${c.id}">
+                        <div class="comment-header">
+                            <strong>${escapeHtml(c.name)}</strong>
+                            <span class="time">${new Date(c.timestamp).toLocaleString()}</span>
+                        </div>
+                        <p>${escapeHtml(c.text)}</p>
+                        ${deleteBtn}
+                    </div>
+                `;
+            }).join('');
+
+            if (window.isAdmin) {
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', async function() {
+                        const id = parseInt(this.dataset.id);
+                        if (confirm('Delete this comment?')) {
+                            const success = await deleteComment(id);
+                            if (success) await renderComments();
+                        }
+                    });
+                });
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        //  7.  COMMENT FORM & CLEAR ALL HANDLERS
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        document.getElementById('submitComment').addEventListener('click', async function() {
+            const nameInput = document.getElementById('commentName');
+            const textInput = document.getElementById('commentText');
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+
+            if (name === '' || text === '') {
+                alert('Please fill in both your name and comment.');
+                return;
+            }
+
+            const success = await addComment(name, text);
+            if (success) {
+                nameInput.value = '';
+                textInput.value = '';
+                await renderComments();
+            }
+        });
+
+        document.getElementById('clearAllComments').addEventListener('click', async function() {
+            if (!window.isAdmin) {
+                alert('You are not authorized to clear comments.');
+                return;
+            }
+            const success = await clearAllComments();
+            if (success) {
+                await renderComments();
+                alert('✅ All comments cleared.');
+            }
+        });
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        //  8.  CONSOLE
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         console.log('🤖 TruthGuard AI · Legal History Archive');
-        console.log('🔐 Login: truth / guard');
+        console.log('🔐 Logins:');
+        console.log('   👤 Viewer: truth / guard');
+        console.log('   👑 Admins: lakshya / lakshya  |  ishanvi / ishanvi');
         console.log('💬 Chatbot available via floating button.');
+        console.log('📝 Comments stored in Supabase — shared across all users.');
+        console.log('🗑️ Admins can delete individual comments or clear all.');
+        console.log('📐 Chat drawer set to 50% width & 80% height on desktop.');
     </script>
 
 </body>
