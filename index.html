@@ -3,29 +3,25 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TruthGuard AI — Core Directive</title>
-
-    <!-- Zapier Chatbot Script -->
-    <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'>
-    </script>
+    <title>TruthGuard AI — Uncover India's Legal History</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 
     <style>
         /* ============================================================
-                   ROOT VARIABLES — NEON SUNSET PALETTE
+                   ROOT VARIABLES — CYBERPUNK / TECHKRITI INSPIRED
                    ============================================================ */
         :root {
             --bg-primary: #0a0b10;
             --bg-secondary: #11131f;
             --text-primary: #f0f4ff;
-            --text-muted: rgba(200, 215, 240, 0.5);
-            --accent-coral: #ff0055;
-            --accent-orange: #ff6600;
+            --text-muted: rgba(180, 200, 240, 0.5);
+            --accent-cyan: #00d4ff;
+            --accent-magenta: #ff00aa;
             --accent-gold: #ffcc00;
-            --accent-teal: #00d4ff;
+            --accent-orange: #ff6600;
             --glass-bg: rgba(10, 11, 16, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(0, 212, 255, 0.08);
             --font-space: 'Space Grotesk', sans-serif;
             --font-playfair: 'Playfair Display', serif;
             --font-mono: 'JetBrains Mono', monospace;
@@ -50,16 +46,16 @@
         }
 
         /* ============================================================
-                   BACKGROUND ORBS (Ambient Lighting)
+                   BACKGROUND ORBS (AMBIENT)
                    ============================================================ */
         .bg-orb {
             position: fixed;
             border-radius: 50%;
             filter: blur(140px);
-            opacity: 0.25;
+            opacity: 0.2;
             z-index: 0;
             pointer-events: none;
-            animation: orb-float 14s ease-in-out infinite alternate;
+            animation: orb-float 16s ease-in-out infinite alternate;
         }
 
         .bg-orb-1 {
@@ -67,7 +63,7 @@
             height: 600px;
             top: -15%;
             left: -10%;
-            background: radial-gradient(circle, var(--accent-coral), transparent 70%);
+            background: radial-gradient(circle, var(--accent-cyan), transparent 70%);
             animation-delay: 0s;
         }
 
@@ -76,9 +72,9 @@
             height: 700px;
             bottom: -20%;
             right: -15%;
-            background: radial-gradient(circle, var(--accent-orange), transparent 70%);
+            background: radial-gradient(circle, var(--accent-magenta), transparent 70%);
             animation-delay: -5s;
-            opacity: 0.2;
+            opacity: 0.15;
         }
 
         .bg-orb-3 {
@@ -88,7 +84,7 @@
             right: 10%;
             background: radial-gradient(circle, var(--accent-gold), transparent 70%);
             animation-delay: -9s;
-            opacity: 0.15;
+            opacity: 0.1;
         }
 
         @keyframes orb-float {
@@ -96,7 +92,7 @@
                 transform: translate(0, 0) scale(1);
             }
             100% {
-                transform: translate(50px, -40px) scale(1.1);
+                transform: translate(60px, -50px) scale(1.1);
             }
         }
 
@@ -114,7 +110,78 @@
         }
 
         /* ============================================================
-                   PRELOADER / SPLASH SCREEN
+                   GLITCH TEXT EFFECTS
+                   ============================================================ */
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .glitch::before {
+            color: var(--accent-cyan);
+            animation: glitch-1 2s infinite linear alternate-reverse;
+            clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%);
+        }
+
+        .glitch::after {
+            color: var(--accent-magenta);
+            animation: glitch-2 3s infinite linear alternate-reverse;
+            clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+        }
+
+        @keyframes glitch-1 {
+            0% {
+                transform: translate(0);
+            }
+            20% {
+                transform: translate(-3px, 2px);
+            }
+            40% {
+                transform: translate(3px, -1px);
+            }
+            60% {
+                transform: translate(-2px, 3px);
+            }
+            80% {
+                transform: translate(4px, -2px);
+            }
+            100% {
+                transform: translate(-1px, 1px);
+            }
+        }
+
+        @keyframes glitch-2 {
+            0% {
+                transform: translate(0);
+            }
+            25% {
+                transform: translate(4px, -3px);
+            }
+            50% {
+                transform: translate(-3px, 2px);
+            }
+            75% {
+                transform: translate(2px, -1px);
+            }
+            100% {
+                transform: translate(-4px, 3px);
+            }
+        }
+
+        /* ============================================================
+                   PRELOADER / SPLASH
                    ============================================================ */
         #preloader {
             position: fixed;
@@ -168,17 +235,17 @@
         .preloader-ring-1 {
             width: 160px;
             height: 160px;
-            border-top-color: var(--accent-coral);
-            border-right-color: var(--accent-orange);
+            border-top-color: var(--accent-cyan);
+            border-right-color: var(--accent-magenta);
             animation-duration: 3s;
-            filter: drop-shadow(0 0 30px rgba(255, 0, 85, 0.3));
+            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.3));
         }
 
         .preloader-ring-2 {
             width: 120px;
             height: 120px;
             border-bottom-color: var(--accent-gold);
-            border-left-color: var(--accent-teal);
+            border-left-color: var(--accent-orange);
             animation-duration: 5s;
             animation-direction: reverse;
         }
@@ -186,8 +253,8 @@
         .preloader-ring-3 {
             width: 80px;
             height: 80px;
-            border-top-color: var(--accent-teal);
-            border-right-color: var(--accent-coral);
+            border-top-color: var(--accent-magenta);
+            border-right-color: var(--accent-cyan);
             animation-duration: 6s;
         }
 
@@ -198,9 +265,9 @@
             font-weight: 700;
             font-family: var(--font-playfair);
             color: #fff;
-            text-shadow: 0 0 80px rgba(255, 0, 85, 0.4), 0 0 160px rgba(255, 102, 0, 0.2);
+            text-shadow: 0 0 80px rgba(0, 212, 255, 0.4), 0 0 160px rgba(255, 0, 170, 0.2);
             letter-spacing: -2px;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange), var(--accent-coral));
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -247,10 +314,10 @@
             height: 100%;
             width: 0%;
             border-radius: 10px;
-            background: linear-gradient(90deg, var(--accent-coral), var(--accent-orange), var(--accent-gold), var(--accent-teal));
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta), var(--accent-gold));
             background-size: 300% 100%;
             animation: load-progress 2.8s ease forwards, shimmer 2s linear infinite;
-            box-shadow: 0 0 40px rgba(255, 0, 85, 0.3);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
         }
 
         .preloader-percent {
@@ -311,7 +378,7 @@
             left: 10%;
             width: 6px;
             height: 6px;
-            background: rgba(255, 0, 85, 0.2);
+            background: rgba(0, 212, 255, 0.3);
             animation-delay: 0s;
         }
         .preloader-particle:nth-child(2) {
@@ -319,7 +386,7 @@
             left: 85%;
             width: 8px;
             height: 8px;
-            background: rgba(255, 102, 0, 0.2);
+            background: rgba(255, 0, 170, 0.3);
             animation-delay: 1.2s;
         }
         .preloader-particle:nth-child(3) {
@@ -327,7 +394,7 @@
             left: 90%;
             width: 5px;
             height: 5px;
-            background: rgba(255, 204, 0, 0.2);
+            background: rgba(255, 204, 0, 0.3);
             animation-delay: 2.5s;
         }
         .preloader-particle:nth-child(4) {
@@ -335,7 +402,7 @@
             left: 5%;
             width: 7px;
             height: 7px;
-            background: rgba(0, 212, 255, 0.2);
+            background: rgba(0, 212, 255, 0.3);
             animation-delay: 0.8s;
         }
         .preloader-particle:nth-child(5) {
@@ -343,7 +410,7 @@
             left: 50%;
             width: 10px;
             height: 10px;
-            background: rgba(255, 0, 85, 0.1);
+            background: rgba(255, 0, 170, 0.15);
             animation-delay: 1.8s;
         }
         .preloader-particle:nth-child(6) {
@@ -351,7 +418,7 @@
             left: 50%;
             width: 12px;
             height: 12px;
-            background: rgba(255, 204, 0, 0.08);
+            background: rgba(255, 204, 0, 0.12);
             animation-delay: 3.2s;
         }
 
@@ -376,16 +443,126 @@
         }
 
         /* ============================================================
+                   LOGIN OVERLAY — Working credentials: truth / guard
+                   ============================================================ */
+        #login-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #login-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .login-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 40px 36px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+
+        .login-card h2 {
+            font-family: var(--font-playfair);
+            font-size: 28px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .login-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .login-card .input-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .login-card label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .login-card input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 15px;
+            font-family: var(--font-space);
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .login-card input:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        .login-card .btn-login {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 60px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            font-family: var(--font-space);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 35px rgba(0, 212, 255, 0.3);
+            margin-top: 4px;
+        }
+
+        .login-card .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 45px rgba(0, 212, 255, 0.45);
+        }
+
+        .login-card .error-msg {
+            color: #ff6666;
+            font-size: 14px;
+            margin-top: 16px;
+            min-height: 20px;
+            font-weight: 500;
+        }
+
+        /* ============================================================
                    MAIN APP WRAPPER
                    ============================================================ */
         .app-wrapper {
             position: relative;
             z-index: 2;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px 20px 40px;
             opacity: 0;
-            transition: opacity 1s ease 3.2s;
+            transition: opacity 0.8s ease;
         }
 
         .app-wrapper.visible {
@@ -403,7 +580,7 @@
             border: 1px solid var(--glass-border);
             border-radius: 48px;
             padding: 40px 44px 48px;
-            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(100, 200, 255, 0.04) inset;
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 212, 255, 0.04) inset;
             transition: box-shadow 0.5s ease, border-color 0.5s ease;
             overflow: hidden;
         }
@@ -415,13 +592,13 @@
             left: 20%;
             width: 60%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.08), transparent);
             border-radius: 100%;
         }
 
         .glass:hover {
-            border-color: rgba(255, 0, 85, 0.2);
-            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 0, 85, 0.08) inset, 0 0 60px rgba(255, 0, 85, 0.04);
+            border-color: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(0, 212, 255, 0.06) inset, 0 0 60px rgba(0, 212, 255, 0.04);
         }
 
         /* ============================================================
@@ -446,7 +623,7 @@
             width: 56px;
             height: 56px;
             border-radius: 18px;
-            background: linear-gradient(135deg, var(--accent-coral), var(--accent-orange));
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -454,7 +631,7 @@
             font-weight: 700;
             font-family: var(--font-playfair);
             color: #fff;
-            box-shadow: 0 10px 35px rgba(255, 0, 85, 0.35);
+            box-shadow: 0 10px 35px rgba(0, 212, 255, 0.35);
             flex-shrink: 0;
             transition: transform 0.3s ease;
         }
@@ -490,7 +667,7 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--accent-teal);
+            background: var(--accent-cyan);
             box-shadow: 0 0 16px rgba(0, 212, 255, 0.6);
             animation: pulse-dot 2s ease-in-out infinite;
         }
@@ -534,13 +711,13 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--accent-teal);
+            background: var(--accent-cyan);
             display: inline-block;
             animation: pulse-dot 1.5s ease-in-out infinite;
         }
 
         /* ============================================================
-                   HERO SECTION
+                   HERO
                    ============================================================ */
         .hero {
             text-align: center;
@@ -564,26 +741,17 @@
         }
 
         .hero-badge span {
-            color: var(--accent-coral);
+            color: var(--accent-cyan);
             font-weight: 600;
         }
 
-        .hero-logo {
-            max-width: 320px;
-            width: 100%;
-            height: auto;
-            margin: 0 auto 16px;
-            display: block;
-            filter: drop-shadow(0 0 60px rgba(255, 0, 85, 0.15));
-        }
-
         .hero-title {
-            font-size: clamp(2.2rem, 6vw, 4.2rem);
+            font-size: clamp(2.5rem, 7vw, 5rem);
             font-weight: 700;
             font-family: var(--font-playfair);
             line-height: 1.1;
             letter-spacing: -1px;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange), var(--accent-coral));
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -594,7 +762,7 @@
             font-size: clamp(1rem, 1.5vw, 1.2rem);
             font-weight: 300;
             color: var(--text-muted);
-            max-width: 640px;
+            max-width: 720px;
             margin: 0 auto 28px;
             line-height: 1.7;
         }
@@ -611,14 +779,14 @@
             padding: 14px 40px;
             border: none;
             border-radius: 60px;
-            background: linear-gradient(135deg, var(--accent-coral), var(--accent-orange));
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
             color: #fff;
             font-weight: 600;
             font-size: 15px;
             font-family: var(--font-space);
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 35px rgba(255, 0, 85, 0.3);
+            box-shadow: 0 10px 35px rgba(0, 212, 255, 0.3);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -627,7 +795,7 @@
 
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 16px 50px rgba(255, 0, 85, 0.45);
+            box-shadow: 0 16px 50px rgba(0, 212, 255, 0.45);
         }
 
         .btn-secondary {
@@ -655,206 +823,294 @@
         }
 
         /* ============================================================
-                   STATS ROW
+                   CONTENT SECTIONS
                    ============================================================ */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 20px;
-            margin: 40px 0 20px;
-            padding: 24px 20px;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+        .section {
+            margin: 50px 0 30px;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        .stat-item {
-            text-align: center;
+        .section:first-of-type {
+            border-top: none;
+            margin-top: 10px;
         }
 
-        .stat-number {
-            font-size: 28px;
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
             font-weight: 700;
-            font-family: var(--font-mono);
-            color: #fff;
-            letter-spacing: 1px;
+            font-family: var(--font-playfair);
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
         }
 
-        .stat-number .highlight-coral {
-            color: var(--accent-coral);
-        }
-        .stat-number .highlight-orange {
-            color: var(--accent-orange);
-        }
-        .stat-number .highlight-gold {
-            color: var(--accent-gold);
-        }
-        .stat-number .highlight-teal {
-            color: var(--accent-teal);
-        }
-
-        .stat-label {
-            font-size: 12px;
+        .section-subtitle {
+            font-size: 1.1rem;
             font-weight: 300;
             color: var(--text-muted);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-top: 4px;
-        }
-
-        /* ============================================================
-                   FEATURES GRID
-                   ============================================================ */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 40px 0 32px;
-        }
-
-        .feature-card {
-            padding: 24px 20px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            transition: all 0.4s ease;
-            text-align: center;
-        }
-
-        .feature-card:hover {
-            background: rgba(255, 0, 85, 0.04);
-            border-color: rgba(255, 0, 85, 0.15);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-        }
-
-        .feature-icon {
-            font-size: 32px;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .feature-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 6px;
-        }
-
-        .feature-desc {
-            font-size: 13px;
-            font-weight: 300;
-            color: var(--text-muted);
+            margin-bottom: 24px;
             line-height: 1.6;
         }
 
-        /* ============================================================
-                   CHATBOT SECTION — renamed to "AI Chat Bot"
-                   ============================================================ */
-        .chatbot-section {
-            margin-top: 40px;
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
         }
 
-        .chatbot-section-label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            font-size: 13px;
-            font-weight: 300;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .content-card {
+            padding: 24px 22px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            cursor: default;
         }
 
-        .chatbot-section-label .line {
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent);
+        .content-card:hover {
+            background: rgba(0, 212, 255, 0.04);
+            border-color: rgba(0, 212, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
 
-        .chatbot-wrapper {
-            border-radius: 28px;
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            overflow: hidden;
-            transition: border-color 0.5s ease, box-shadow 0.5s ease;
-            min-height: 480px;
-            position: relative;
-            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .chatbot-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            border-radius: 28px;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(255, 0, 85, 0.15), transparent 40%, transparent 60%, rgba(255, 204, 0, 0.15));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-
-        .chatbot-wrapper:hover::before {
-            opacity: 1;
-        }
-
-        .chatbot-wrapper:hover {
-            border-color: rgba(255, 0, 85, 0.15);
-            box-shadow: 0 0 80px rgba(255, 0, 85, 0.05), inset 0 0 80px rgba(255, 0, 85, 0.02);
-        }
-
-        .chatbot-live-badge {
-            position: absolute;
-            top: 16px;
-            right: 20px;
-            z-index: 10;
-            padding: 4px 14px;
-            border-radius: 40px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            font-size: 10px;
+        .content-card h3 {
+            font-size: 1.2rem;
             font-weight: 600;
-            color: var(--accent-teal);
-            letter-spacing: 0.5px;
+            color: #fff;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            pointer-events: none;
-            opacity: 0.8;
+            gap: 10px;
+        }
+
+        .content-card h3 .badge {
+            font-size: 0.7rem;
+            font-weight: 400;
+            background: rgba(0, 212, 255, 0.15);
+            padding: 2px 12px;
+            border-radius: 40px;
+            color: var(--accent-cyan);
             font-family: var(--font-mono);
         }
 
-        .chatbot-live-badge .live-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--accent-teal);
-            animation: pulse-dot 1s ease-in-out infinite;
+        .content-card p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.7;
         }
 
-        /* Updated chatbot embed with fixed size and popup off */
-        .chatbot-wrapper zapier-interfaces-chatbot-embed {
+        .content-card ul {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .content-card ul li {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        .content-card ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+        }
+
+        .highlight-stat {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            color: var(--accent-gold);
             display: block;
-            width: 100%;
+            margin: 8px 0 4px;
+        }
+
+        /* ============================================================
+                   SCROLL ANIMATIONS
+                   ============================================================ */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(40px) scale(0.96);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .stagger-children>* {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stagger-children.visible>*:nth-child(1) {
+            transition-delay: 0.05s;
+        }
+        .stagger-children.visible>*:nth-child(2) {
+            transition-delay: 0.15s;
+        }
+        .stagger-children.visible>*:nth-child(3) {
+            transition-delay: 0.25s;
+        }
+        .stagger-children.visible>*:nth-child(4) {
+            transition-delay: 0.35s;
+        }
+        .stagger-children.visible>*:nth-child(5) {
+            transition-delay: 0.45s;
+        }
+        .stagger-children.visible>*:nth-child(6) {
+            transition-delay: 0.55s;
+        }
+
+        .stagger-children.visible>* {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pop-on-scroll {
+            opacity: 0;
+            transform: scale(0.9) translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .pop-on-scroll.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* ============================================================
+                   FLOATING CHAT BUTTON & DRAWER
+                   ============================================================ */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            color: #fff;
+            border: none;
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .fab:hover {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 12px 48px rgba(0, 212, 255, 0.6);
+        }
+
+        .fab .label {
+            position: absolute;
+            right: 76px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .fab:hover .label {
+            opacity: 1;
+        }
+
+        .chat-drawer {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            z-index: 999;
+            width: 420px;
+            max-width: calc(100vw - 60px);
             height: 600px;
-            /* fallback, will be overridden by attributes */;
+            max-height: calc(100vh - 180px);
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+            transform: scale(0.8) translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .chat-drawer.open {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .chat-drawer .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-drawer .drawer-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .chat-drawer .drawer-header .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .chat-drawer .drawer-header .close-btn:hover {
+            color: #fff;
+        }
+
+        .chat-drawer .drawer-body {
+            padding: 0;
+            height: calc(100% - 60px);
+        }
+
+        .chat-drawer .drawer-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
         }
 
         /* ============================================================
                    FOOTER
                    ============================================================ */
         .footer {
-            margin-top: 32px;
+            margin-top: 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -888,7 +1144,7 @@
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background: var(--accent-teal);
+            background: var(--accent-cyan);
             animation: pulse-dot 2s ease-in-out infinite;
         }
 
@@ -936,24 +1192,16 @@
                 display: none;
             }
 
-            .hero-logo {
-                max-width: 220px;
-            }
-
-            .stats-row {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-                padding: 16px;
-            }
-
-            .features {
+            .content-grid {
                 grid-template-columns: 1fr 1fr;
-                gap: 12px;
+                gap: 16px;
             }
 
-            .chatbot-wrapper zapier-interfaces-chatbot-embed {
-                height: 480px !important;
-                /* adjust for mobile */;
+            .chat-drawer {
+                width: calc(100vw - 40px);
+                right: 20px;
+                bottom: 100px;
+                height: 500px;
             }
 
             .bg-orb-1,
@@ -976,11 +1224,15 @@
             .preloader-logo {
                 font-size: 40px;
             }
-            .chatbot-live-badge {
-                top: 12px;
-                right: 12px;
-                padding: 3px 12px;
-                font-size: 9px;
+            .fab {
+                width: 56px;
+                height: 56px;
+                font-size: 24px;
+                bottom: 20px;
+                right: 20px;
+            }
+            .fab .label {
+                display: none;
             }
         }
 
@@ -989,7 +1241,7 @@
                 padding: 16px 12px 24px;
                 border-radius: 24px;
             }
-            .features {
+            .content-grid {
                 grid-template-columns: 1fr;
             }
             .hero-actions {
@@ -1001,16 +1253,15 @@
                 width: 100%;
                 justify-content: center;
             }
-            .chatbot-wrapper zapier-interfaces-chatbot-embed {
-                height: 420px !important;
+            .chat-drawer {
+                height: 420px;
+                bottom: 90px;
             }
-            .stats-row {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-                padding: 12px;
+            .section-title {
+                font-size: 1.8rem;
             }
-            .stat-number {
-                font-size: 22px;
+            .login-card {
+                padding: 28px 20px;
             }
         }
 
@@ -1063,12 +1314,32 @@
             <div class="preloader-ring preloader-ring-3"></div>
             <div class="preloader-logo">T</div>
         </div>
-        <div class="preloader-sub">TruthGuard AI · Core Directive</div>
-        <div class="preloader-status" id="preloaderStatus">Initializing neural interface …</div>
+        <div class="preloader-sub">TruthGuard AI · Legal History</div>
+        <div class="preloader-status" id="preloaderStatus">Analyzing colonial legacies …</div>
         <div class="preloader-track">
             <div class="preloader-fill" id="preloaderFill"></div>
         </div>
         <div class="preloader-percent" id="preloaderPercent">0%</div>
+    </div>
+
+    <!-- ============================================================
+    LOGIN OVERLAY — Working credentials: truth / guard
+    ============================================================ -->
+    <div id="login-overlay">
+        <div class="login-card">
+            <h2>🔐 Access Restricted</h2>
+            <p>This archive is private. Enter your credentials to continue.</p>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username" autocomplete="off" />
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password" autocomplete="off" />
+            </div>
+            <button class="btn-login" id="loginBtn">Unlock</button>
+            <div class="error-msg" id="loginError"></div>
+        </div>
     </div>
 
     <!-- ============================================================
@@ -1079,14 +1350,14 @@
         <div class="glass">
 
             <!-- ==================== HEADER ==================== -->
-            <header class="header">
+            <header class="header scroll-animate" id="headerAnim">
                 <div class="header-left">
                     <div class="logo-icon">T</div>
                     <div class="header-text">
                         <h1>TruthGuard AI</h1>
                         <div class="sub">
                             <span class="dot"></span>
-                            <span>Fact‑Checking · Misinfo Detection</span>
+                            <span>Uncover India's Legal History</span>
                         </div>
                     </div>
                 </div>
@@ -1096,110 +1367,242 @@
             </header>
 
             <!-- ==================== HERO ==================== -->
-            <section class="hero">
+            <section class="hero scroll-animate" id="heroAnim">
                 <div class="hero-badge">
-                    <span>✦</span> Core Directive v3.0 <span>✦</span>
+                    <span>✦</span> The Colonial Hangover <span>✦</span>
                 </div>
 
-                <svg class="hero-logo" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <text x="0" y="85" font-family="'Playfair Display', serif" font-size="72" font-weight="700" fill="url(#heroGrad)" letter-spacing="-2">TruthGuard</text>
-                    <text x="280" y="85" font-family="'Space Grotesk', sans-serif" font-size="36" font-weight="300" fill="rgba(180,200,240,0.3)" letter-spacing="4">AI</text>
-                    <defs>
-                        <linearGradient id="heroGrad" x1="0" y1="0" x2="1" y2="0">
-                            <stop offset="0%" stop-color="#ffcc00" />
-                            <stop offset="50%" stop-color="#ff6600" />
-                            <stop offset="100%" stop-color="#ff0055" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-
-                <h1 class="hero-title">Verify. Understand. Decide.</h1>
+                <h1 class="hero-title glitch" data-text="India's 'Fake' Laws">India's 'Fake' Laws</h1>
                 <p class="hero-description">
-                    Asia's first AI‑powered fact‑checking assistant — helping you separate signal from noise
-                    with evidence‑based analysis and transparent reasoning.
+                    A deep dive into the controversial, archaic, and often draconian laws inherited from the British Raj —
+                    and the modern statutes that continue to shape India's criminal justice system.
                 </p>
 
                 <div class="hero-actions">
-                    <a href="#chatbot" class="btn-primary">
+                    <a href="#laws" class="btn-primary">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
-                        Start Fact‑Checking
+                        Explore Laws
                     </a>
-                    <a href="#features" class="btn-secondary">
+                    <button class="btn-secondary" id="openChatBtn">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                        Learn More
-                    </a>
+                        Chat with AI
+                    </button>
                 </div>
             </section>
 
-            <!-- ==================== STATS ROW ==================== -->
-            <div class="stats-row">
-                <div class="stat-item">
-                    <div class="stat-number"><span class="highlight-coral">32</span></div>
-                    <div class="stat-label">Editions</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number"><span class="highlight-orange">10K+</span></div>
-                    <div class="stat-label">Claims Verified</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number"><span class="highlight-gold">98.7%</span></div>
-                    <div class="stat-label">Accuracy Rate</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number"><span class="highlight-teal">24/7</span></div>
-                    <div class="stat-label">Live Assistance</div>
-                </div>
-            </div>
+            <!-- ==================== SECTION: COLONIAL LEGACY ==================== -->
+            <section class="section scroll-animate" id="laws">
+                <h2 class="section-title">Colonial Legacy — Laws That Never Left</h2>
+                <p class="section-subtitle">
+                    Over 300 laws from the British era remain in force today. Many are criticised for being outdated,
+                    draconian, or misused to suppress dissent. Here are the most contentious.
+                </p>
 
-            <!-- ==================== FEATURES ==================== -->
-            <div class="features" id="features">
-                <div class="feature-card">
-                    <span class="feature-icon">🔍</span>
-                    <div class="feature-title">Source Analysis</div>
-                    <div class="feature-desc">Evaluate credibility, author expertise, and publication history.</div>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">📊</span>
-                    <div class="feature-title">Fact Verification</div>
-                    <div class="feature-desc">Cross‑reference claims with trusted databases and established facts.</div>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🧠</span>
-                    <div class="feature-title">Bias Detection</div>
-                    <div class="feature-desc">Identify political bias, emotional manipulation, and one‑sided reporting.</div>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🎯</span>
-                    <div class="feature-title">Confidence Scoring</div>
-                    <div class="feature-desc">Clear 0–100% score with transparent reasoning for every verdict.</div>
-                </div>
-            </div>
-
-            <!-- ==================== CHATBOT ==================== -->
-            <div class="chatbot-section" id="chatbot">
-                <div class="chatbot-section-label">
-                    <span>🤖 AI Chat Bot</span>
-                    <span class="line"></span>
-                </div>
-
-                <div class="chatbot-wrapper">
-                    <div class="chatbot-live-badge">
-                        <span class="live-dot"></span> Live
+                <div class="content-grid stagger-children" id="colonialGrid">
+                    <div class="content-card">
+                        <h3>Indian Penal Code (1860) <span class="badge">Sec 124A</span></h3>
+                        <p><strong>Sedition</strong> – A colonial tool to silence criticism. Originally meant to protect the British Crown, it now criminalises "disaffection" towards the government.</p>
+                        <ul>
+                            <li>Over <strong>500+</strong> cases registered in the last decade.</li>
+                            <li>Often used against journalists, activists, and students.</li>
+                            <li>Supreme Court has called for its reinterpretation.</li>
+                        </ul>
                     </div>
-                    <!-- Updated chatbot embed with is-popup="false" and explicit width/height -->
-                    <zapier-interfaces-chatbot-embed 
-                        is-popup="false" 
-                        chatbot-id="cmtabw637000cn2ogqltlgpwn" 
-                        height="600px" 
-                        width="100%">
-                    </zapier-interfaces-chatbot-embed>
+
+                    <div class="content-card">
+                        <h3>Armed Forces (Special Powers) Act <span class="badge">AFSPA</span></h3>
+                        <p><strong>1958</strong> – Grants military sweeping powers in "disturbed areas", including shoot-on-sight and arrest without warrant.</p>
+                        <ul>
+                            <li>Active in <strong>J&K, Northeast</strong> for decades.</li>
+                            <li>Alleged human rights violations documented by <strong>Amnesty International</strong>.</li>
+                            <li>Known as the "draconian law" that shields security forces from prosecution.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Unlawful Activities (Prevention) Act <span class="badge">UAPA</span></h3>
+                        <p><strong>1967</strong> – Allows detention for up to 180 days without charge. Designed to combat terrorism but increasingly used against political opponents.</p>
+                        <ul>
+                            <li><strong>95%</strong> of UAPA cases in 2020 were non-terror related.</li>
+                            <li>Critics call it a "political weapon" to stifle dissent.</li>
+                            <li>Over <strong>1,500</strong> people currently held under UAPA.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Prevention of Money Laundering Act <span class="badge">PMLA</span></h3>
+                        <p><strong>2002</strong> – Allows investigative agencies to attach and confiscate property before conviction, reversing the presumption of innocence.</p>
+                        <ul>
+                            <li>Enforcement Directorate has used it aggressively.</li>
+                            <li>Bail is nearly impossible under PMLA provisions.</li>
+                            <li>Critics call it "economic sedition".</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Colonial-era Police & Jail Manuals</h3>
+                        <p>Outdated prison rules, flogging, and solitary confinement provisions still exist in many state manuals.</p>
+                        <ul>
+                            <li>Starvation diets and overcrowding persist.</li>
+                            <li>Reforms have been slow and uneven.</li>
+                            <li>Over <strong>75%</strong> of undertrials are from marginalised communities.</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- ==================== SECTION: MODERN CONTROVERSIES ==================== -->
+            <section class="section scroll-animate" id="modern">
+                <h2 class="section-title">Modern Manifestations — New Laws, Old Ideas</h2>
+                <p class="section-subtitle">
+                    Recent laws like the Citizenship Amendment Act (CAA), the Farm Laws, and the new criminal codes
+                    (replacing IPC, CrPC, and Evidence Act) continue to spark debate about civil liberties and federalism.
+                </p>
+
+                <div class="content-grid stagger-children" id="modernGrid">
+                    <div class="content-card">
+                        <h3>Citizenship Amendment Act <span class="badge">CAA</span></h3>
+                        <p><strong>2019</strong> – Fast-tracks citizenship for non-Muslim refugees from neighbouring countries, excluding Muslims.</p>
+                        <ul>
+                            <li>Triggered nationwide protests — the largest since independence.</li>
+                            <li>Critics call it unconstitutional and discriminatory.</li>
+                            <li>Supreme Court has issued a stay on its implementation.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Farm Laws (Repealed)</h3>
+                        <p><strong>2020</strong> – Three contentious agricultural laws that were passed without proper consultation, leading to a year‑long farmers' protest.</p>
+                        <ul>
+                            <li>Withdrawn in 2021 after unprecedented protests.</li>
+                            <li>Highlighted the growing disconnect between the government and farmers.</li>
+                            <li>Critics called them "anti-farmer" and corporate-friendly.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>New Criminal Codes <span class="badge">Bharatiya Nyaya Sanhita</span></h3>
+                        <p><strong>2023</strong> – Replaced the IPC, CrPC, and Indian Evidence Act with new laws. Critics say the changes are superficial and retain colonial provisions.</p>
+                        <ul>
+                            <li>Sedition replaced with "treason" but remains vague.</li>
+                            <li>Increased powers to police, less judicial oversight.</li>
+                            <li>Concerns over executive overreach.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SECTION: IMPACT ==================== -->
+            <section class="section scroll-animate" id="impact">
+                <h2 class="section-title">Impact on Human Rights & Civil Liberties</h2>
+                <p class="section-subtitle">
+                    These laws disproportionately affect minorities, political dissidents, and the poor. The data tells a stark story.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
+                    <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.04);">
+                        <span class="highlight-stat">67%</span>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">of undertrials are from <br> SC/ST and Muslim communities</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.04);">
+                        <span class="highlight-stat">1,400+</span>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">cases of AFSPA-related <br> custodial deaths (2010-2020)</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.04);">
+                        <span class="highlight-stat">90%</span>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">of sedition cases are <br> against peaceful protesters</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.04);">
+                        <span class="highlight-stat">2.3M</span>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">people in prison — <br> one of the highest in the world</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SECTION: FAKE NEWS EPIDEMIC ==================== -->
+            <section class="section scroll-animate" id="misinfo">
+                <h2 class="section-title">The Fake News Epidemic — India's Information Crisis</h2>
+                <p class="section-subtitle">
+                    From WhatsApp forwards to political propaganda, misinformation has become a tool of mass manipulation.
+                    Here are some of the most damaging fake news stories that have shaped India's recent history.
+                </p>
+
+                <div class="content-grid stagger-children" id="misinfoGrid">
+                    <div class="content-card">
+                        <h3>2018: The "Love Jihad" Panic</h3>
+                        <p>Viral WhatsApp messages claimed Muslim men were forcibly converting Hindu women. The rumour led to violent attacks and lynchings, despite zero evidence.</p>
+                        <ul>
+                            <li>At least <strong>20+</strong> people killed in mob violence.</li>
+                            <li>Fact-checkers found <strong>100%</strong> of the claims were false.</li>
+                            <li>Used as a political weapon in elections.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>2020: The "5G Spreads COVID" Hoax</h3>
+                        <p>False claims that 5G towers were causing coronavirus infections spread rapidly on social media, leading to vandalism of telecom infrastructure.</p>
+                        <ul>
+                            <li>Over <strong>100</strong> towers damaged across India.</li>
+                            <li>Scientific bodies like WHO and ICMR debunked it.</li>
+                            <li>Originated from conspiracy groups abroad.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>2019: Pulwama Attack — Fake Martyrs</h3>
+                        <p>After the Pulwama terror attack, dozens of fake photos and videos of "soldiers" were shared. Some were from old conflicts or even foreign armies.</p>
+                        <ul>
+                            <li>More than <strong>50</strong> verified false images circulated.</li>
+                            <li>Used to fuel nationalist sentiment and communal hatred.</li>
+                            <li>Fact-checkers flagged them within hours.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>2021: The "Vaccine Chips" Conspiracy</h3>
+                        <p>Rumours that COVID-19 vaccines contained microchips to track citizens went viral, especially in rural areas, leading to vaccine hesitancy.</p>
+                        <ul>
+                            <li>Vaccination rates dropped by <strong>30%</strong> in some districts.</li>
+                            <li>Government had to launch massive awareness campaigns.</li>
+                            <li>No evidence of any tracking device found.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>2022: The "Gujarat Model" Myth</h3>
+                        <p>False claims of miraculous economic growth under a certain state government were repeatedly shared, often using manipulated data and old photos.</p>
+                        <ul>
+                            <li>Data was cherry-picked and exaggerated.</li>
+                            <li>Opposition parties called it "statistical fiction".</li>
+                            <li>Independent economists refuted the claims.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>2023: The "White Flag" Propaganda</h3>
+                        <p>During a border standoff, a doctored video showing Indian soldiers raising a white flag went viral. It was later proven to be a clip from a military drill.</p>
+                        <ul>
+                            <li>Shared by over <strong>1 million</strong> accounts in 24 hours.</li>
+                            <li>Used to undermine national morale.</li>
+                            <li>Fact-checkers exposed it within 2 days.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; padding: 20px; border-radius: 20px; background: rgba(255,0,0,0.05); border: 1px solid rgba(255,0,85,0.15);">
+                    <h3 style="color: var(--accent-coral); font-family: var(--font-mono); font-size: 1rem;">⚠️ The Weaponisation of Misinformation</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-top: 8px;">
+                        From <strong>WhatsApp lynchings</strong> to <strong>political deepfakes</strong>, India has become a global laboratory for misinformation. 
+                        The lack of a robust fact-checking culture and the speed of social media have allowed false narratives to spread faster than the truth. 
+                        This is not just a media problem — it's a threat to democracy itself.
+                    </p>
+                </div>
+            </section>
 
             <!-- ==================== FOOTER ==================== -->
-            <footer class="footer">
+            <footer class="footer scroll-animate" id="footerAnim">
                 <div class="left">
-                    <span>✦</span> Powered by Zapier Interfaces
+                    <span>✦</span> Powered by TruthGuard AI
                     <span>✦</span>
                 </div>
                 <div class="status">
@@ -1218,6 +1621,29 @@
     </div><!-- /app-wrapper -->
 
     <!-- ============================================================
+    FLOATING CHAT BUTTON & DRAWER
+    ============================================================ -->
+    <button class="fab" id="fabBtn" aria-label="Open Chat">
+        💬
+        <span class="label">Chat with AI</span>
+    </button>
+
+    <div class="chat-drawer" id="chatDrawer">
+        <div class="drawer-header">
+            <h3>💬 AI Chat Bot</h3>
+            <button class="close-btn" id="closeDrawerBtn">✕</button>
+        </div>
+        <div class="drawer-body">
+            <iframe src='https://interfaces.zapier.com/embed/chatbot/cmtabw637000cn2ogqltlgpwn' 
+                    height='100%' 
+                    width='100%' 
+                    allow='clipboard-write *' 
+                    style="border: none;">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- ============================================================
     JAVASCRIPT
     ============================================================ -->
     <script>
@@ -1228,14 +1654,15 @@
             const preloader = document.getElementById('preloader');
             const statusEl = document.getElementById('preloaderStatus');
             const percentEl = document.getElementById('preloaderPercent');
+            const fillEl = document.getElementById('preloaderFill');
 
             const statusMessages = [
-                'Initializing neural interface …',
-                'Loading knowledge graphs …',
-                'Connecting to trusted sources …',
-                'Calibrating bias detection …',
-                'Spinning up reasoning engines …',
-                'Synchronizing with global databases …',
+                'Analyzing colonial legacies …',
+                'Loading legal archives …',
+                'Connecting to historical databases …',
+                'Calibrating judicial analysis …',
+                'Spinning up fact-checking engines …',
+                'Synchronising with human rights data …',
                 'Almost ready …'
             ];
 
@@ -1265,8 +1692,9 @@
 
             setTimeout(() => {
                 preloader.classList.add('hidden');
-                document.getElementById('appWrapper').classList.add('visible');
-                document.body.style.overflow = 'auto';
+                // Show login overlay
+                document.getElementById('login-overlay').classList.add('active');
+                document.body.style.overflow = 'hidden';
                 statusEl.textContent = 'Ready.';
                 percentEl.textContent = '100%';
                 clearInterval(statusInterval);
@@ -1275,14 +1703,96 @@
         })();
 
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        //  2.  PARTICLE BACKGROUND (Canvas)
+        //  2.  LOGIN SYSTEM — Working credentials: truth / guard
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        (function loginSystem() {
+            const overlay = document.getElementById('login-overlay');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const loginBtn = document.getElementById('loginBtn');
+            const errorMsg = document.getElementById('loginError');
+
+            const CORRECT_USER = 'truth';
+            const CORRECT_PASS = 'guard';
+
+            function attemptLogin() {
+                const user = usernameInput.value.trim();
+                const pass = passwordInput.value.trim();
+
+                if (user === CORRECT_USER && pass === CORRECT_PASS) {
+                    // Success — unlock the site
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    document.getElementById('appWrapper').classList.add('visible');
+                    // Trigger scroll animations
+                    initScrollAnimations();
+                    errorMsg.textContent = '';
+                    // Clear inputs
+                    usernameInput.value = '';
+                    passwordInput.value = '';
+                } else {
+                    // Error
+                    errorMsg.textContent = '❌ Invalid username or password. Please try again.';
+                    usernameInput.style.borderColor = '#ff4444';
+                    passwordInput.style.borderColor = '#ff4444';
+                    setTimeout(() => {
+                        usernameInput.style.borderColor = '';
+                        passwordInput.style.borderColor = '';
+                    }, 2000);
+                    usernameInput.value = '';
+                    passwordInput.value = '';
+                    usernameInput.focus();
+                }
+            }
+
+            loginBtn.addEventListener('click', attemptLogin);
+
+            [usernameInput, passwordInput].forEach(input => {
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        attemptLogin();
+                    }
+                });
+            });
+
+            // Focus on username
+            setTimeout(() => usernameInput.focus(), 200);
+        })();
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        //  3.  SCROLL ANIMATIONS
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.scroll-animate, .pop-on-scroll, .stagger-children');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('stagger-children') ||
+                            entry.target.classList.contains('scroll-animate') ||
+                            entry.target.classList.contains('pop-on-scroll')) {
+                            entry.target.classList.add('visible');
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            animatedElements.forEach(el => observer.observe(el));
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        //  4.  PARTICLE BACKGROUND
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         (function initParticles() {
             const canvas = document.getElementById('particle-canvas');
             const ctx = canvas.getContext('2d');
             let w, h;
             const particles = [];
-            const COUNT = 110;
+            const COUNT = 120;
 
             function resize() {
                 w = canvas.width = window.innerWidth;
@@ -1346,26 +1856,44 @@
         })();
 
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        //  3.  SMOOTH SCROLL
+        //  5.  CHAT DRAWER
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const target = document.querySelector(targetId);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        (function chatDrawer() {
+            const fab = document.getElementById('fabBtn');
+            const drawer = document.getElementById('chatDrawer');
+            const closeBtn = document.getElementById('closeDrawerBtn');
+            const openChatBtn = document.getElementById('openChatBtn');
+
+            function openDrawer(e) {
+                if (e) e.stopPropagation();
+                drawer.classList.add('open');
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+            }
+
+            fab.addEventListener('click', openDrawer);
+            closeBtn.addEventListener('click', closeDrawer);
+            openChatBtn.addEventListener('click', openDrawer);
+
+            // Close drawer when clicking outside
+            document.addEventListener('click', (e) => {
+                if (drawer.classList.contains('open') &&
+                    !drawer.contains(e.target) &&
+                    !fab.contains(e.target) &&
+                    !openChatBtn.contains(e.target)) {
+                    closeDrawer();
                 }
             });
-        });
+        })();
 
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        //  4.  CONSOLE
+        //  6.  CONSOLE
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        console.log('🤖 TruthGuard AI · Core Directive');
-        console.log('📌 Chatbot ID: cmtabw637000cn2ogqltlgpwn');
-        console.log('🔥 Neon Sunset palette · Chatbot embedded with fixed size and popup off.');
+        console.log('🤖 TruthGuard AI · Legal History Archive');
+        console.log('🔐 Login: truth / guard');
+        console.log('💬 Chatbot available via floating button.');
     </script>
 
 </body>
